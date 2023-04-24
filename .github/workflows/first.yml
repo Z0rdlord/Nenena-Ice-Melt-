@@ -8,8 +8,8 @@ env:
 
 jobs:
   run-python:
-    runs-on: ubuntu-latest
-    steps:
+   runs-on: ubuntu-latest
+   steps:
       - name: Set Variables
         uses: actions/checkout@v3
         
