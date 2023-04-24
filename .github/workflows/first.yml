@@ -10,7 +10,9 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      run: |
+        git checkout ${{ github.ref }}
+        git fetch --prune --unshallow
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -18,9 +20,11 @@ jobs:
         python-version: '3.x'
 
     - name: Set up environment variable
-      run: echo "GOOGLE_API_CREDENTIALS=${{ secrets.GOOGLE_API_CREDENTIALS }}" >> $GITHUB_ENV
+      run: |
+        echo "GOOGLE_API_CREDENTIALS=${{ secrets.GOOGLE_API_CREDENTIALS }}" >> $GITHUB_ENV
 
     - name: Run Python script
-      run: python scripts.py
+      run: |
+        python myscript.py
       env:
-        MY_SECRET: ${{ env.MY_SECRET }}
+        GOOGLE_API_CREDENTIALS: ${{ env.GOOGLE_API_CREDENTIALS }}
