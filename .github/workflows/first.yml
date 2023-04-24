@@ -1,14 +1,13 @@
-name: Set Environment Variable from JSON Secret
-on: [push]
+name: Set Environment Variable
+on:
+  push:
+    branches: [ main ]
 
 jobs:
-  build:
+  set-env-variable:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Set environment variable from JSON secret
-      env:
-        GOOGLE_API_CREDENTIALS: ${{ secrets.GOOGLE_API_CREDENTIALS }}
-      run: |
-        echo $MY_VARIABLE > $GITHUB_ENV
+      - name: Set Environment Variable
+        env:
+          GOOGLE_API_CREDENTIALS: ${{ secrets.GOOGLE_API_CREDENTIALS }}
+        run: echo "GOOGLE_API_CREDENTIALS=$GOOGLE_API_CREDENTIALS" >> $GITHUB_ENV
