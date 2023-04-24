@@ -1,4 +1,14 @@
-steps:
-  - name: Sample Azure action
-    env: # Or as an environment variable
-      credentials: ${{ secrets.GOOGLE_API_CREDENTIALS }}
+name: Set Environment Variable from JSON Secret
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set environment variable from JSON secret
+      env:
+        GOOGLE_API_CREDENTIALS: ${{ secrets.GOOGLE_API_CREDENTIALS }}
+      run: |
+        echo $MY_VARIABLE > $GITHUB_ENV
