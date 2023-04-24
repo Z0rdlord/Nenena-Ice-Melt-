@@ -1,4 +1,0 @@
-import os
-
-GOOGLE_API_CREDENTIALS = os.environ["GOOGLE_API_CREDENTIALS"]
-
