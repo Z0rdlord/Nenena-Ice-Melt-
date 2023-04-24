@@ -8,5 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set Environment Variable
-        run: |
-          echo "export GOOGLE_API_CREDENTIALS=$GOOGLE_API_CREDENTIALS" >> $GITHUB_ENV
+        env:
+          GOOGLE_API_CREDENTIALS: ${{ secrets.GOOGLE_API_CREDENTIALS}}
+
