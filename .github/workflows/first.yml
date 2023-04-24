@@ -9,5 +9,5 @@ jobs:
     steps:
       - name: Set Environment Variable
         env:
-          GOOGLE_API_CREDENTIALS: ${{ secrets.GOOGLE_API_CREDENTIALS }}
+          GOOGLE_API_CREDENTIALS: '${{ secrets.GOOGLE_API_CREDENTIALS }}'
         run: echo "GOOGLE_API_CREDENTIALS=$GOOGLE_API_CREDENTIALS" >> $GITHUB_ENV
