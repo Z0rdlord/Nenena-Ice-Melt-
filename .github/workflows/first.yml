@@ -1,15 +1,25 @@
 name: Set environment variable from secret
 
-on: [push]
+on:
+  workflow_dispatch
+
+env:
+  MY_SECRET: ${{ secrets.GOOGLE_API_CREDENTIALS }}
 
 jobs:
-  build:
+  run-python:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Set environment variable
-        env:
-          MY_SECRET: ${{ secrets.GOOGLE_API_CREDENTIALS }}
-        run: |
-          python scripts.py
+      - name: Set Variables
+        uses: actions/checkout@v3
+        
+      -name: Setup Python
+       uses: actions/setup-python@v4
+       with:
+          phython-verion '3.11'
+          
+      -name: run python Script
+       run: |
+        python scripts.py
+  
 
