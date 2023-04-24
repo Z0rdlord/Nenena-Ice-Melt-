@@ -1,25 +1,26 @@
-name: Set environment variable from secret
+name: Save Secret to Environment Variable
 
 on:
-  workflow_dispatch
-
-env:
-  MY_SECRET: ${{ secrets.GOOGLE_API_CREDENTIALS }}
+  push:
+    branches: [main]
 
 jobs:
-  run-python:
-   runs-on: ubuntu-latest
-   steps:
-      - name: Set Variables
-        uses: actions/checkout@v3
-        
-      -name: Setup Python
-       uses: actions/setup-python@v4
-       with:
-          phython-verion '3.11'
-          
-      -name: run python Script
-       run: |
-        python scripts.py
-  
+  build:
+    runs-on: ubuntu-latest
 
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Set up environment variable
+      run: echo "GOOGLE_API_CREDENTIALS=${{ secrets.GOOGLE_API_CREDENTIALS }}" >> $GITHUB_ENV
+
+    - name: Run Python script
+      run: python scripts.py
+      env:
+        MY_SECRET: ${{ env.MY_SECRET }}
