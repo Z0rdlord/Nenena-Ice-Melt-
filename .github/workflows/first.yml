@@ -1,14 +1,15 @@
-name: Set Environment Variable
-on:
-  push:
-    branches: [ main ]
+name: Set environment variable from secret
+
+on: [push]
 
 jobs:
-  set-env-variable:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Set Environment Variable
+      - name: Set environment variable
         env:
-          GOOGLE_API_CREDENTIALS: ${{ secrets.GOOGLE_API_CREDENTIALS }}
-        run: python scripts.py
+          MY_SECRET: ${{ secrets.GOOGLE_API_CREDENTIALS }}
+        run: |
+          python scripts.py
 
