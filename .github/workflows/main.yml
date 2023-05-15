@@ -26,4 +26,4 @@ jobs:
         env: 
           GOOGLE_API_CREDENTIALS: ${{ secrets.GOOGLE_API_CREDENTIALS }}
 
-        run: python email-from-python.py
+        run: python scripts.py
